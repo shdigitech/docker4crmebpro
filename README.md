@@ -1,6 +1,6 @@
 # Docker Compose
 
-This is a Docker Compose configuration for quickly and easily spinning up a test / development environment for CRMEB. 
+This is a Docker Compose configuration for quickly and easily spinning up a test / development environment for CRMEB PRO version. 
 
 - A few links of CRMEB
     
@@ -13,9 +13,9 @@ The CRMEB application code will be running in this environment can be downloaded
 
 [https://gitee.com/ZhongBangKeJi/CRMEB](https://gitee.com/ZhongBangKeJi/CRMEB)
 
-This compose file defines an application with four services: `nginx`, `php`, `MySQL`, `Redis`. The image for `php` is built with the `Dockerfile` inside the `php` directory. It builds on top of php `7.4` with extra php extensions required by CRMEB. Additionally, `Supervisor` is also built-in which is required by CRMEB to run `Queue`.
+This compose file defines an application with four services: `nginx`, `php`, `MySQL`, `Redis`. The image for `php` is built with the `Dockerfile` inside the `php` directory. It builds on top of php `7.3`,  with `Supervisor` and `Swoole` required by CRMEB.
 
-When deploying the application, docker compose maps the container port `80` to port `28038` of the host as specified in the file. Make sure port `28038` on the host is not occupied, otherwise the port should be changed.
+When deploying the application, docker compose maps the container port `80` to port `28138` of the host as specified in the file. Make sure port `28138` on the host is not occupied, otherwise the port should be changed.
 
 ## Prerequisites
 
@@ -35,51 +35,45 @@ Earlier versions may also work but haven’t been tested.
 
     
     ```bash
-    git clone https://github.com/shdigitech/docker4crmeb.git
+    git clone https://github.com/shdigitech/docker4crmebpro.git
     ```
     
-2. Clone CRMEB application code:
-    
-    ```bash
-    git clone https://gitee.com/ZhongBangKeJi/CRMEB.git
-    ```
+2. Unzip CRMEB PRO application code to `crmebpro` folder.
     
 3. Check you have the folder structure like this(both repos sit on the same level)
     
     ```bash
     .
-    ├── CRMEB
-    └── docker4crmeb
+    ├── crmebpro
+    └── docker4crmebpro
     ```
     
-4. Set file permissions required in later installation
+4. Copy certain files according to PHP version, in this case, 7.3.
 
     
     ```bash
-    sudo chmod 777 ./CRMEB/crmeb/public ./CRMEB/crmeb/runtime ./CRMEB/crmeb/.env ./CRMEB/crmeb/.version ./CRMEB/crmeb/.constant -R
+    cp -r ./crmebpro/help/7.3/* ./crmebpro/
     ```
     
 5. Enter the docker-compose folder and spin up containers
 
     
     ```bash
-    cd docker4crmeb
-    docker compose pull php-fpm && docker compose up -d
+    cd docker4crmebpro
+    docker compose up -d
     ```
     
     <aside>
-    💡 First time build might take a while depending on your hardware configuration, be patient.
-    
+    💡 First time build might take a while depending on your hardware configuration, be patient.    
     </aside>
     
     <aside>
-    💡 Omitting the ‘-d’ parameter will output a bunch of logs on the console, which could be helpful for debugging. Note that pressing Ctrl + C or closing the console window will shutdown all containers.
-    
+    💡 Omitting the ‘-d’ parameter will output a bunch of logs on the console, which could be helpful for debugging. Note that pressing Ctrl + C or closing the console window will shutdown all containers.    
     </aside>
     
 6. Now open your favorite browser and navigate to
     
-    [http://localhost:28038/](http://localhost:28038/)
+    [http://localhost:28138/](http://localhost:28138/)
     
     You shall see the installation wizard page of CRMEB
     
@@ -98,21 +92,25 @@ Earlier versions may also work but haven’t been tested.
     | --- | --- |
     | 服务器地址 | redis |
     | 端口号 | 6379 |
+
 8. After installation finishes, you can access the frontend site and admin site respectively at
-    1. [http://localhost:28038](http://localhost:28038)
-    2. [http://localhost:28038/admin](http://localhost:28038/admin)
+    1. [http://localhost:28138](http://localhost:28138)
+    2. [http://localhost:28138/admin](http://localhost:28138/admin)
     
     <aside>
     💡 Note: at the time of writing this document, CRMEB has a bug that the admin page will redirect to its login page on port 80 instead of our custom port, simply add the port number back to the login page URL and you should be able to access the login page.
-    
+    💡 If you encounter 'login failed' after installation. Restart containers should fix it.
+        ```bash
+        docker compose restart
+        ```
     </aside>
     
 9. This docker-compose combo also packs a PHPMYADMIN for easy database access, you can find it at
     
-    [http://localhost:28039/](http://localhost:28039/)
+    [http://localhost:28139/](http://localhost:28139/)
     
 10. To shut everything down
     
     ```bash
     docker compose down
-    ```
+    ``` 

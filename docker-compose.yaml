@@ -51,8 +51,8 @@ services:
     working_dir: /var/www
     tty: true
     volumes:
-      - ../crmeb-pro:/var/www #程序运行目录
-      - ../crmeb-pro/runtime:/var/www/temp #程序缓存目录
+      - ../crmebpro:/var/www #程序运行目录
+      - ../crmebpro/runtime:/var/www/temp #程序缓存目录
       - ./php/php.ini:/usr/local/etc/php/php.ini
       - ./php/supervisor:/etc/supervisor
       - ./logs/php:/var/log/php/
@@ -78,8 +78,8 @@ services:
       - ./nginx/sites:/etc/nginx/sites-available
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./logs/nginx:/var/log/nginx
-      - ../crmeb-pro:/var/www #程序运行目录
-      - ../crmeb-pro/runtime:/var/www/temp #程序缓存目录
+      - ../crmebpro:/var/www #程序运行目录
+      - ../crmebpro/runtime:/var/www/temp #程序缓存目录
     networks:
       - application
 
