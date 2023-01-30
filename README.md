@@ -46,7 +46,7 @@ Earlier versions may also work but haven’t been tested.
     └── docker4crmebpro
     ```
     
-3. Copy certain files according to PHP version, in this case, 7.3.
+3. According to CRMEBPRO installation procedures, Copy certain files corresponding to PHP version, in this case, 7.3.
 
     
     ```bash
@@ -64,6 +64,7 @@ Earlier versions may also work but haven’t been tested.
     <aside>
     💡 First time build might take a while depending on your hardware configuration, be patient.    
     </aside>
+    
     
     <aside>
     💡 Omitting the ‘-d’ parameter will output a bunch of logs on the console, which could be helpful for debugging. Note that pressing Ctrl + C or closing the console window will shutdown all containers.    
@@ -102,7 +103,6 @@ Earlier versions may also work but haven’t been tested.
     
     <aside>
     💡 Note: at the time of writing this document, CRMEB has a bug that the admin page will redirect to its login page on port 80 instead of our custom port, simply add the port number back to the login page URL and you should be able to access the login page.
-    💡 If you encounter 'login failed' after installation. Restart containers should fix it.
     </aside>
     
 9. This docker-compose combo also packs a PHPMYADMIN for easy database access, you can find it at
