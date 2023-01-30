@@ -2,17 +2,6 @@
 
 This is a Docker Compose configuration for quickly and easily spinning up a test / development environment for CRMEB PRO version. 
 
-- A few links of CRMEB
-    
-    [https://www.crmeb.com/](https://www.crmeb.com/)
-    
-    [https://doc.crmeb.com/pro_s/pro_single](https://doc.crmeb.com/pro_s/pro_single)
-    
-
-The CRMEB application code will be running in this environment can be downloaded here.
-
-[https://gitee.com/ZhongBangKeJi/CRMEB](https://gitee.com/ZhongBangKeJi/CRMEB)
-
 This compose file defines an application with four services: `nginx`, `php`, `MySQL`, `Redis`. The image for `php` is built with the `Dockerfile` inside the `php` directory. It builds on top of php `7.3`,  with `Supervisor` and `Swoole` required by CRMEB.
 
 When deploying the application, docker compose maps the container port `80` to port `28138` of the host as specified in the file. Make sure port `28138` on the host is not occupied, otherwise the port should be changed.
