@@ -38,9 +38,7 @@ Earlier versions may also work but haven’t been tested.
     git clone https://github.com/shdigitech/docker4crmebpro.git
     ```
     
-2. Unzip CRMEB PRO application code to `crmebpro` folder.
-    
-3. Check you have the folder structure like this(both repos sit on the same level)
+2. Unzip CRMEB PRO application code to `crmebpro` folder. Check you have the folder structure like this(both repos sit on the same level)
     
     ```bash
     .
@@ -48,14 +46,14 @@ Earlier versions may also work but haven’t been tested.
     └── docker4crmebpro
     ```
     
-4. Copy certain files according to PHP version, in this case, 7.3.
+3. Copy certain files according to PHP version, in this case, 7.3.
 
     
     ```bash
     cp -r ./crmebpro/help/7.3/* ./crmebpro/
     ```
     
-5. Enter the docker-compose folder and spin up containers
+4. Enter the docker-compose folder and spin up containers
 
     
     ```bash
@@ -71,13 +69,13 @@ Earlier versions may also work but haven’t been tested.
     💡 Omitting the ‘-d’ parameter will output a bunch of logs on the console, which could be helpful for debugging. Note that pressing Ctrl + C or closing the console window will shutdown all containers.    
     </aside>
     
-6. Now open your favorite browser and navigate to
+5. Now open your favorite browser and navigate to
     
     [http://localhost:28138/](http://localhost:28138/)
     
     You shall see the installation wizard page of CRMEB
     
-7. Configuration for services(other fields can be left default)
+6. Configuration for services(other fields can be left default)
     
     
     | 数据库MySql配置 |  |
@@ -92,17 +90,19 @@ Earlier versions may also work but haven’t been tested.
     | --- | --- |
     | 服务器地址 | redis |
     | 端口号 | 6379 |
+    
+7. After installation finishes, restart containers for good measure. (Otherwise you'll likely to encounter 'Login failed' error)
+    ```bash
+    docker compose restart
+    ```
 
-8. After installation finishes, you can access the frontend site and admin site respectively at
+8. After containers restarted, you can access the frontend site and admin site respectively at
     1. [http://localhost:28138](http://localhost:28138)
     2. [http://localhost:28138/admin](http://localhost:28138/admin)
     
     <aside>
     💡 Note: at the time of writing this document, CRMEB has a bug that the admin page will redirect to its login page on port 80 instead of our custom port, simply add the port number back to the login page URL and you should be able to access the login page.
     💡 If you encounter 'login failed' after installation. Restart containers should fix it.
-        ```bash
-        docker compose restart
-        ```
     </aside>
     
 9. This docker-compose combo also packs a PHPMYADMIN for easy database access, you can find it at
