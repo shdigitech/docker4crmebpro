@@ -34,7 +34,9 @@ Earlier versions may also work but haven’t been tested.
     ├── crmebpro
     └── docker4crmebpro
     ```
-    
+   <aside>
+    💡 You can use any other folder than `crmebpro`, just be sure to change the .env file in the docker compose folder.
+   </aside>
 3. According to CRMEBPRO installation procedures, Copy certain files corresponding to PHP version, in this case, 7.3.
 
     
@@ -42,18 +44,21 @@ Earlier versions may also work but haven’t been tested.
     cp -r ./crmebpro/help/7.3/* ./crmebpro/
     ```
     
-4. Enter the docker-compose folder and spin up containers
+4. Enter the docker-compose folder, create the .env file. It's a good time to take a look at the parameters in the .env file and make changes if needed.
 
     
     ```bash
     cd docker4crmebpro
+    cp .env.default .env
+    ```
+
+5. Spin up containers
+    ```bash
     docker compose up -d
     ```
-    
     <aside>
     💡 First time build might take a while depending on your hardware configuration, be patient.    
-    </aside>
-    
+    </aside>    
     
     <aside>
     💡 Omitting the ‘-d’ parameter will output a bunch of logs on the console, which could be helpful for debugging. Note that pressing Ctrl + C or closing the console window will shutdown all containers.    
@@ -63,7 +68,7 @@ Earlier versions may also work but haven’t been tested.
     
     [http://localhost:28138/](http://localhost:28138/)
     
-    You shall see the installation wizard page of CRMEB
+    You shall see the installation wizard page of CRMEB. Please follow the prompts to complete the installation.
     
 6. Configuration for services(other fields can be left default)
     
@@ -72,18 +77,18 @@ Earlier versions may also work but haven’t been tested.
     | --- | --- |
     | 数据库服务器 | mysql |
     | 数据库端口 | 3306 |
-    | 数据库用户名 | crmeb |
-    | 数据库密码 | crmeb |
-    | 数据库名 | crmeb |
+    | 数据库用户名 | crmeb_pro |
+    | 数据库密码 | crmeb_pro |
+    | 数据库名 | crmeb_pro |
     
     | Redis配置 |  |
     | --- | --- |
     | 服务器地址 | redis |
     | 端口号 | 6379 |
     
-7. After installation finishes, restart containers for good measure. (Otherwise you'll likely to encounter 'Login failed' error)
+7. Once the installation is complete, it's necessary to restart the PHP services to ensure that CRMEB-PRO is fully functional.
     ```bash
-    docker compose restart
+    docker compose restart php-fpm
     ```
 
 8. After containers restarted, you can access the frontend site and admin site respectively at
